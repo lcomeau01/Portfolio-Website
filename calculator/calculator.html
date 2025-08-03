@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Calculator </title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+    <!-- JAVASCRIPT FILE -->
+     <script src="calculator.js"></script>
+     
+    <!-- the actual widget itself -->
+    <section class="calculator-widget"> 
+
+        <!-- the title and exit button of the widget -->
+        <!-- TODO: put this in a PHP header later to include in all widgets -->
+        <section class="header">
+            <div id="exit-box"></div>
+            <h3> Calculator </h3>
+        </section>
+
+        <!-- the body of the calculator widget -->
+        <section class="body">
+
+            <!-- the total -->
+                <div class="total"> 0 </div>
+
+            <!-- The Buttons of the Calculator -->
+                <!-- action buttons-->
+                 <!-- first row of calculator -->
+                <div class="button action" id="clear"> C </div>
+                <div class="button action" id="scientific-notation"> E </div>
+                <div class="button action" id="equals"> = </div>
+                <div class="button operator" id="multiply"> * </div>
+
+               <!-- operator buttons and numbers 1 through 9 -->
+                <!-- row 1 of calculator -->
+                <div class="button number"> 7 </div>
+                <div class="button number"> 8 </div>
+                <div class="button number"> 9 </div>
+                <div class="button operator" id="divide"> / </div>
+
+                <!-- row 2 of calculator -->
+                <div class="button number"> 4 </div>
+                <div class="button number"> 5 </div>
+                <div class="button number"> 6 </div>
+                <div class="button operator" id="subtract"> - </div>
+
+                <div class="button number"> 1 </div>
+                <div class="button number"> 2 </div>
+                <div class="button number"> 3 </div>
+                <div class="button operator" id="add"> + </div>
+
+                <!-- zero -->
+                <div class="button number" id="zero"> 0 </div>
+                <div class="button number"> . </div>
+                
+        </section>
+    </section> 
+</body>
+</html>
