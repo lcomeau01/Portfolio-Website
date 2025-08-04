@@ -48,16 +48,18 @@ body{
 }
 
 .notepage{ 
-  /* display: none;  */
+  display: none; 
   width:95%; 
   height:90%; 
   border: none; 
   outline: none; 
   resize: none;
   overflow: hidden;
+  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
-.active-page
+.notepage.active-page
 { 
   display: flex !important; 
 }
