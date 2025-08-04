@@ -9,11 +9,11 @@
 <body>
 
     <!-- the actual widget itself -->
-    <section class="calculator-widget"> 
+    <section class="calculator-widget" id="calculator-widget"> 
 
         <!-- the title and exit button of the widget -->
         <!-- TODO: put this in a PHP header later to include in all widgets -->
-        <section class="header">
+        <section class="header" id="calculator-widget-header">
             <div id="exit-box"></div>
             <h3> Calculator </h3>
         </section>
@@ -27,38 +27,37 @@
             <!-- The Buttons of the Calculator -->
                 <!-- action buttons-->
                  <!-- row 1 of calculator -->
-                <div class="button action" id="clear"> C </div>
-                <div class="button action" id="scientific-notation"> E </div>
-                <div class="button action" id="equals"> = </div>
-                <div class="button operator" id="multiply"> * </div>
+                <button class="button action" id="clear">C</button>
+                <button class="button action" id="scientific-notation">E</button>
+                <button class="button action" id="equals">=</button>
+                <button class="button operator" id="multiply">*</button>
 
-               <!-- operator buttons and numbers 1 through 9 -->
+
                 <!-- row 2 of calculator -->
-                <div class="button number"> 7 </div>
-                <div class="button number"> 8 </div>
-                <div class="button number"> 9 </div>
-                <div class="button operator" id="divide"> / </div>
+                <button class="button number">7</button>
+                <button class="button number">8</button>
+                <button class="button number">9</button>
+                <button class="button operator" id="divide">/</button>
 
                 <!-- row 3 of calculator -->
-                <div class="button number"> 4 </div>
-                <div class="button number"> 5 </div>
-                <div class="button number"> 6 </div>
-                <div class="button operator" id="subtract"> - </div>
+                <button class="button number">4</button>
+                <button class="button number">5</button>
+                <button class="button number">6</button>
+                <button class="button operator" id="subtract">-</button>
 
                 <!-- row 4 of calculator -->
-                <div class="button number"> 1 </div>
-                <div class="button number"> 2 </div>
-                <div class="button number"> 3 </div>
-                <div class="button operator" id="add"> + </div>
+                <button class="button number">1</button>
+                <button class="button number">2</button>
+                <button class="button number">3</button>
+                <button class="button operator" id="add">+</button>
 
                 <!-- row 5 of calculator -->
-                <div class="button number" id="zero"> 0 </div>
-                <div class="button number"> . </div>
-                
+                <button class="button number" id="zero">0</button>
+                <button class="button number">.</button>  
         </section>
     </section> 
 
     <!-- JAVASCRIPT FILE -->
-     <script src="calculator.js"></script>
+     <script type="module" src="calculator.js"></script>
 </body>
 </html>
