@@ -107,10 +107,16 @@ body {
 
 .calculator-widget .header #exit-box
 { 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
     width: 70px; 
     height: 70px; 
     border: white 5px solid; 
     cursor: pointer; 
+    color: white; 
+    font-size: 110px; 
+    overflow: hidden;
 }
 
 .calculator-widget .button 
