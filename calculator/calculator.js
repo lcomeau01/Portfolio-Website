@@ -1,6 +1,6 @@
 import { dragElement } from "../drag.js";
 // calculator operation 
-
+const calculator = document.getElementById('calculator-widget'); 
 const buttons = document.getElementsByClassName("button"); 
 console.log(buttons); 
 const calcWindow = document.getElementById("total"); 
@@ -37,10 +37,17 @@ Array.from(buttons).forEach(button => {
             } 
             else if (type == 'scientific-notation') 
             { 
-                if(display == "0") display = "1" + value; 
-                else display += value; 
-
-                currentEquation += "1" + value;
+                if(display == "0" || display == "") 
+                { 
+                    display = "1" + value; 
+                    clear = false; 
+                    currentEquation = "1" + value;
+                }
+                else 
+                { 
+                        display += value; 
+                        currentEquation += value;
+                }
             } 
             else if(type == 'equals')
             {
@@ -48,7 +55,7 @@ Array.from(buttons).forEach(button => {
                 clear = true;  
                 currentTotal = eval(currentEquation); 
                 currentEquation = currentTotal; 
-                display = currentTotal; 
+                display =  parseFloat(currentTotal.toPrecision(8)).toString(); 
             }
         }
         else 
@@ -57,11 +64,11 @@ Array.from(buttons).forEach(button => {
             if(clear == true) clear = false; 
             currentTotal = eval(currentEquation); 
             currentEquation = currentTotal + value; 
-            display = currentTotal; 
+            display = parseFloat(currentTotal.toPrecision(8)).toString(); 
         }
 
         if(display == ".") calcWindow.innerText = "0."; 
-        else calcWindow.innerText = parseFloat(parseFloat(display).toPrecision(8)).toString(); 
+        else calcWindow.innerText = display; 
         
         if(operation)
         { 
@@ -71,10 +78,30 @@ Array.from(buttons).forEach(button => {
     }
 });
 
-// TODO: opening and closing the calculator 
+// opening and closing the calculator 
+const exit = document.getElementById("exit-box"); 
+exit.onclick = function() 
+{ 
+    calculator.style.display = "none"; 
+}
 
-// TODO: moving the calculator around the screen 
-dragElement(document.getElementById("calculator-widget")); 
+exit.addEventListener("mouseover", addX); 
+exit.addEventListener("mouseleave", subX)
+
+function addX()
+{ 
+    exit.innerHTML = '&#x2715'; 
+}
+function subX()
+{ 
+    exit.innerHTML = ''; 
+}
+
+
+
+// moving the calculator around the screen 
+dragElement(calculator); 
+
 
 
 
