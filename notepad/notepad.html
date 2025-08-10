@@ -12,7 +12,10 @@
     <section class="notepad-widget" id="notepad-widget">
       <section class="header" id="notepad-widget-header">
           <div id="exit-box"></div>
-          <h3> Notepad </h3>
+          <h3> Note Pad </h3>
+          <!-- THIS DIV IS JUST HERE FOR SPACING PURPOSES -->
+          <div></div> 
+          <!-- THIS DIV IS JUST HERE FOR SPACING PURPOSES -->
       </section>
 
       <section class="notepad-widget-body">
@@ -20,7 +23,10 @@
             <!-- TODO: javescript method that allows for one page to be visible at a time -->
             <!-- TODO: label it as "active notepage" and allow for it to be draggable -->
             <!-- TODO: Stack them all so that all of them are in the same spot at once? -->
-            <textarea class="notepage active-page" id="notepage-1"></textarea>
+            <textarea class="notepage active-page" id="notepage-1"color="black">Click on the dog ear to go back a page. 
+Click on the lower triangle to go to the next page. 
+
+There are 8 pages for you to use :) </textarea>
             <textarea class="notepage" id="notepage-2"></textarea>
             <textarea class="notepage" id="notepage-3"></textarea>
             <textarea class="notepage" id="notepage-4"></textarea>
@@ -32,10 +38,12 @@
       </section>
 
       <section class = "notepad-widget-footer" id="notepad-widget-footer">
-        <div id="next-triangle"></div>
-        <div id="back-triangle"></div>
+        <canvas id="next-back-buttons"></canvas>
+        <div id="page-number"></div>
       </section>
+      <section id="bottom-pages"></section>
     </section>
+    
 
     <!-- JAVASCRIPT FILE -->
     <script type="module" src="notepad.js"></script>
