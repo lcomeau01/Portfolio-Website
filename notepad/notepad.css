@@ -1,4 +1,4 @@
-* {margin: 0px; }
+* {margin: 0px; font-family: ChicagoFLF;}
 
 body, html 
 { 
@@ -28,14 +28,25 @@ body{
 { 
   display: flex; 
   align-items: center;
-  justify-content: space-evenly; 
+  justify-content: space-between; 
   height: 10%; 
   width: 100%; 
-  background-color: black;
+  background-color: black; 
+  background-image: linear-gradient(to bottom, white 0%, white 1px, transparent 2px, transparent 5px);
+  background-size: 100% 12%; /* Defines the height of each repeating segment */
+  box-shadow: 0 0 0 5px white inset;
   color: white; 
   font-family: 'DePixel'; 
-  font-size: 30px; 
   cursor: pointer;
+  border-bottom: black solid 3px; 
+}
+
+.notepad-widget .header h3{ 
+    background-color: white;
+    color: black; 
+    padding: 0px 5px; 
+    margin: 0px; 
+    font-size: 3.5vh; 
 }
 
 .notepad-widget .header #exit-box
@@ -43,14 +54,16 @@ body{
     display: flex; 
     justify-content: center;
     align-items: center;
-    width: 50px; 
-    height: 50px; 
-    border: white 5px solid; 
-    cursor: pointer; 
-    color: white; 
-    font-size: 90px; 
-    text-align: center;
+    width: 3vh; 
+    height: 3vh; 
+    cursor: pointer;
+    box-shadow: 0 0 0 2px black inset;
+    border: solid 2px white; 
+    font-size: 2.5vh;
+    color: black; 
     overflow: hidden;
+    background-color: white;
+    margin-left: 1vw; 
 }
 
 
@@ -66,14 +79,12 @@ body{
 .notepage{ 
   display: none; 
   width:95%; 
-  height:90%; 
+  height:80%; 
   border: none; 
   outline: none; 
   resize: none;
   overflow: hidden;
-  white-space: nowrap;
-  overflow-wrap: break-word;
-  font-size: 40px;
+  font-size: 3vh;
 }
 
 .notepage.active-page
@@ -85,29 +96,41 @@ body{
 { 
   display: flex; 
   align-items: flex-start;
+  justify-content: space-between;
   width: 100%; 
-  height: 10%; 
-  border: red solid 3px; 
+  height: 7vh; 
+  font-size: 5vh; 
+  /* border: red solid 3px;  */
   overflow: hidden; 
 }
 
-.notepad-widget .notepad-widget-footer #back-triangle
-{ 
-  width: 0; 
-  height: 0; 
-
-  border-left: 0px solid transparent; 
-  border-right: 10em solid grey; 
-  border-bottom: 6em solid transparent; 
+.notepad-widget .notepad-widget-footer div{ 
+    border-bottom: black solid 3px;
+    width: 100%; 
+    height: 92%; 
+    display: flex; 
+    justify-content: center;
 }
 
-.notepad-widget .notepad-widget-footer #next-triangle
+.notepad-widget .notepad-widget-footer #next-back-buttons 
 { 
-  width: 0; 
-  height: 0; 
+    width: 7vh; 
+    height: 7vh; 
+    image-rendering: pixelated;
+    border-bottom: transparent solid 3px;
+}
 
-  border-left: 10em solid black; 
-  border-right: 0px solid transparent; 
-  /* border-bottom: 6em solid transparent;  */
-  border-top: 6em solid transparent; 
+.notepad-widget .notepad-widget-footer #page-number
+ { 
+    font-size: 3vh;
+    font-weight: lighter;
+ }
+
+.notepad-widget #bottom-pages
+{ 
+    height: 2vh; 
+    width: 100%; 
+    background-color: black; 
+    background-image: linear-gradient(to bottom, white 0%, white 1px, transparent 2px, transparent 5px);
+    background-size: 100% 0.5vh;
 }
