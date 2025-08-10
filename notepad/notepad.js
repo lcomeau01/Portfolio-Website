@@ -1,3 +1,8 @@
+import { closeWidget } from "../close.js";
 import { dragElement } from "../drag.js";
 
-dragElement(document.getElementById('notepad-widget')); 
+const notepad = document.getElementById('notepad-widget'); 
+
+dragElement(notepad); 
+closeWidget(notepad); 
+
