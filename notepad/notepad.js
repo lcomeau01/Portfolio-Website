@@ -17,9 +17,9 @@ pageNumber.innerText = currentPage;
 
 /********* DRAWING THE TRIANGLES ON THE CANVAS **********/
 ctx.beginPath();
-ctx.moveTo(-6, 0);                 // top-left
+ctx.moveTo(0, 0);                 // top-left
 ctx.lineTo(canvas.width, 0);      // top-right
-ctx.lineTo(canvas.width, canvas.height - 10);     // bottom-left
+ctx.lineTo(canvas.width, canvas.height);     // bottom-left
 ctx.closePath();
 
 ctx.lineWidth = 7;
@@ -29,9 +29,9 @@ ctx.stroke();
 
 
 ctx.beginPath(); 
-ctx.moveTo(-6, 0); 
-ctx.lineTo(0, canvas.height - 10); 
-ctx.lineTo(canvas.width, canvas.height - 10); 
+ctx.moveTo(0, 0); 
+ctx.lineTo(0, canvas.height); 
+ctx.lineTo(canvas.width, canvas.height); 
 ctx.closePath(); 
 
 ctx.lineWidth = 0.5; 

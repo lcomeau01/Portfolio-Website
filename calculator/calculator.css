@@ -100,7 +100,7 @@ body {
 
 .calculator-widget .header h3 
 { 
-    font-size: 8vh;
+    font-size: 6vh;
     color: white; 
     font-family: 'DePixel';
 }
@@ -115,7 +115,7 @@ body {
     border: white 5px solid; 
     cursor: pointer; 
     color: white; 
-    font-size: 10vh; 
+    font-size: 4vh; 
     overflow: hidden;
 }
 
