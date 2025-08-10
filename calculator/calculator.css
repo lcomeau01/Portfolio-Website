@@ -15,8 +15,8 @@ body {
 { 
     position: fixed; 
     border: 5px black solid; 
-    width: 40%; 
-    height: 60%; 
+    width: 30%; 
+    height: 70%; 
     display: flex;
     flex-direction: column; 
     justify-content: flex-start;
@@ -33,20 +33,20 @@ body {
     display: grid; 
     grid-template-columns: auto auto auto auto; 
     grid-template-rows: auto auto auto auto auto auto auto;
-    grid-column-gap: 40px; 
-    grid-row-gap: 40px; 
+    grid-column-gap: 2vw; 
+    grid-row-gap: 2vh; 
     margin-top: 5%;
 }
 
 .calculator-widget .body button, .calculator-widget .body div 
 { 
-    border: 7px black solid; 
+    border: 0.8vh black solid; 
 }
 
 .total, .button 
 { 
     background-color: white;
-    font-size: 70px; 
+    font-size: 5vh; 
     font-family: 'DePixel'; 
     display: flex; 
     align-items: center;
@@ -63,12 +63,12 @@ body {
 }
 
 .button { 
-    box-shadow: 15px 15px black;
+    box-shadow: 1vh 1vh black;
     justify-content: center;
 }
 
 .button:active { 
-    border: 7px white solid !important;
+    border-color: white !important;
     background-color: black;
     color: white; 
 }
@@ -100,7 +100,7 @@ body {
 
 .calculator-widget .header h3 
 { 
-    font-size: 100px;
+    font-size: 8vh;
     color: white; 
     font-family: 'DePixel';
 }
@@ -110,12 +110,12 @@ body {
     display: flex; 
     justify-content: center;
     align-items: center;
-    width: 70px; 
-    height: 70px; 
+    width: 4vh; 
+    height: 4vh; 
     border: white 5px solid; 
     cursor: pointer; 
     color: white; 
-    font-size: 110px; 
+    font-size: 10vh; 
     overflow: hidden;
 }
 
