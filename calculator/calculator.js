@@ -1,4 +1,5 @@
 import { dragElement } from "../drag.js";
+import { closeWidget } from "../close.js"; 
 // calculator operation 
 const calculator = document.getElementById('calculator-widget'); 
 const buttons = document.getElementsByClassName("button"); 
@@ -79,23 +80,7 @@ Array.from(buttons).forEach(button => {
 });
 
 // opening and closing the calculator 
-const exit = document.getElementById("exit-box"); 
-exit.onclick = function() 
-{ 
-    calculator.style.display = "none"; 
-}
-
-exit.addEventListener("mouseover", addX); 
-exit.addEventListener("mouseleave", subX)
-
-function addX()
-{ 
-    exit.innerHTML = '&#x2715'; 
-}
-function subX()
-{ 
-    exit.innerHTML = ''; 
-}
+closeWidget(calculator); 
 
 
 
