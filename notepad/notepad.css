@@ -1,4 +1,4 @@
-* {margin: 0px; font-family: ChicagoFLF;}
+* {margin: 0px; font-family: 'DePixel';}
 
 body, html 
 { 
@@ -22,6 +22,7 @@ body{
   align-items: center;
   flex-direction: column;
   border: 5px black solid; 
+  overflow: hidden;
 }
 
 .notepad-widget .header

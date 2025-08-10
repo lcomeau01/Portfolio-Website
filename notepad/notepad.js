@@ -67,12 +67,12 @@ function changePage(direction)
     // get the next page number 
     if(direction == "prev")
     { 
-        if(currentPage == 1) currentPage = 8; 
+        if(currentPage == 1) currentPage = 10; 
         else currentPage--; 
     }
     else
     { 
-        if(currentPage == 8) currentPage = 1; 
+        if(currentPage == 10) currentPage = 1; 
         else currentPage++; 
     }
 
