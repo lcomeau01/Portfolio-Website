@@ -5,6 +5,7 @@ import { dragElement } from "../drag.js";
 const puzzle = document.getElementById("puzzle-widget"); 
 let possibleTileValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 const winCondition = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]; 
+const beep =  new Audio('../beep.mp3');
 
 let tileValues = [];
 let possibleMoves = [];
@@ -27,6 +28,7 @@ function getRandomPuzzle()
 
         tileValues.push(value); 
     }
+    // tileValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15];
     populateTiles(); 
 }
 
@@ -112,5 +114,17 @@ function swapSpots(newEmpty)
 { 
     tileValues[emptyIndex] = tileValues[newEmpty]; 
     tileValues[newEmpty] = 0; 
+    checkWin(); 
     populateTiles(); 
+}
+
+function checkWin()
+{ 
+    for(let i = 0; i < 16; i++)
+    { 
+        if(tileValues[i] != winCondition[i]) return false; 
+    }
+
+    beep.play(); 
+    grid.removeEventListener('click', tileClicked); 
 }
