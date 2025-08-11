@@ -3,30 +3,47 @@ import { dragElement } from "../drag.js";
 
 
 const puzzle = document.getElementById("puzzle-widget"); 
-let tileNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; 
+let possibleTileValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const winCondition = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]; 
+
 let tileValues = [];
 let possibleMoves = [];
 let emptyIndex = 0; 
 
+
 dragElement(puzzle);
 closeWidget(puzzle); 
 
-for(let i = 1; i < 17; i++)
+getRandomPuzzle(); 
+
+function getRandomPuzzle()
 { 
-    let index = Math.floor(Math.random() * tileNumbers.length); 
+    for(let i = 1; i < 17; i++)
+    { 
+        let index = Math.floor(Math.random() * possibleTileValues.length); 
 
-    let value = tileNumbers[index]; 
-    tileNumbers.splice(index, 1); 
+        let value = possibleTileValues[index]; 
+        possibleTileValues.splice(index, 1); 
 
-    tileValues.push(value); 
+        tileValues.push(value); 
+    }
+    populateTiles(); 
 }
-populateTiles(); 
+
 
 const grid = document.getElementById("tiles-container"); 
 const gridDimensions = grid.getBoundingClientRect(); 
 const tileWidth = document.getElementById("tile-1").offsetWidth; 
 
-grid.addEventListener("click", getRowCol); 
+grid.addEventListener("click", tileClicked); 
+
+function tileClicked(event)
+{ 
+    let { tileX, tileY } = getRowCol(event);
+    let arrIndex = tileToArr(tileX, tileY); 
+
+    if(possibleMoves.includes(arrIndex)) swapSpots(arrIndex); 
+}
 
 function getRowCol(event)
 { 
@@ -36,7 +53,7 @@ function getRowCol(event)
     let tileX = Math.floor(mouseX/tileWidth); 
     let tileY = Math.floor(mouseY/tileWidth); 
 
-    console.log("(" + tileX + ", " +  tileY + ")"); 
+    return {tileX, tileY}; 
 }
 
 function populateTiles()
@@ -48,6 +65,7 @@ function populateTiles()
             currTile.classList.add("missing-tile");
             populatePossibleMoves(index); 
             emptyIndex = index; 
+            currTile.innerText = ""; 
         }
         else 
         { 
@@ -92,5 +110,7 @@ function tileToArr(tileX, tileY)
 
 function swapSpots(newEmpty)
 { 
-    return true; 
+    tileValues[emptyIndex] = tileValues[newEmpty]; 
+    tileValues[newEmpty] = 0; 
+    populateTiles(); 
 }
