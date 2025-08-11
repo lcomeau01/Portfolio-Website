@@ -1,0 +1,116 @@
+* {margin: 0px; font-family: 'DePixel';}
+
+body, html 
+{ 
+  width: 100%; 
+  height: 100%; 
+}
+
+body{ 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.puzzle-widget
+{ 
+  width: 50vh; 
+  height: 50vh; 
+  position: fixed; 
+  display: flex; 
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  border: 10px black solid; 
+  border-radius: 10px;
+}
+
+.puzzle-widget .header
+{ 
+  display: flex; 
+  align-items: center;
+  justify-content: space-between; 
+  height: 10%; 
+  width: 100%; 
+  background-color: black; 
+  color: white; 
+  font-family: 'DePixel'; 
+  cursor: pointer;
+  border-bottom: black solid 5px;
+}
+
+.puzzle-widget .header h3{ 
+    font-size: 3.5vh; 
+}
+
+.puzzle-widget .header #exit-box
+{ 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 3vh; 
+    height: 3vh; 
+    cursor: pointer;
+    border: solid 0.25vh white; 
+    font-size: 2.5vh;
+    color: white; 
+    overflow: hidden;
+    margin-left: 1vw; 
+}
+
+
+.puzzle-widget-body
+{ 
+  width: 100%; 
+  height: 90%; 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  background-color: black;
+  background-image: 
+    radial-gradient(white 0.2vh, transparent 0.2vh), /* top-left */
+    radial-gradient(white 0.2vh, transparent 0.2vh), /* top-right */
+    radial-gradient(white 0.2vh, transparent 0.2vh), /* center */
+    radial-gradient(white 0.2vh, transparent 0.2vh), /* bottom-left */
+    radial-gradient(white 0.2vh, transparent 0.2vh); /* bottom-right */
+
+  background-size: 1.75vh 1.75vh;
+  background-position:
+    0% 0%,
+    100% 0%,
+    70% 50%,
+    0% 100%,
+    100% 100%;
+
+  
+}
+
+.puzzle-widget .puzzle-widget-body .puzzle-grid 
+{ 
+    background: white; 
+    width: 40vh; 
+    height: 40vh; 
+    /* border: solid black 5px;  */
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    
+}
+
+.puzzle-widget .puzzle-widget-body .puzzle-grid .tile
+{ 
+    border: black solid 5px; 
+    background-color: white;
+    font-size: 3vh;
+    cursor: pointer;
+    /* font-family: 'Tiny and Chunky';
+    color: white; 
+    -webkit-text-stroke: 8px black; */
+}
+
+.puzzle-widget .puzzle-widget-body .puzzle-grid .tile.missing-tile
+{ 
+    background-color: white;
+    background-image: radial-gradient(black 0.2vh, transparent 0.2vh);
+    background-size: 1vh 1vh;
+}
