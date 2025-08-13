@@ -1,0 +1,54 @@
+* {margin: 0px; font-family: 'DePixel';}
+
+body, html 
+{ 
+  width: 100%; 
+  height: 100%; 
+}
+
+body { 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.alarm-widget
+{ 
+  width: 50vh; 
+  height: 30vh; 
+  position: fixed; 
+  display: flex; 
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  border: 3px black solid; 
+}
+
+.alarm-widget .header
+{ 
+  display: flex; 
+  align-items: center;
+  justify-content: space-between; 
+  height: 10%; 
+  width: 100%; 
+  background-color: white; 
+  color: black; 
+  font-family: 'DePixel'; 
+  cursor: pointer;
+  border-bottom: black solid 3px;
+}
+
+.fa-regular
+{ 
+    color: black; 
+}
+
+.active.selection 
+{ 
+    background-color: black;
+}
+
+.active.selection .fa-regular 
+{ 
+    color: white; 
+}

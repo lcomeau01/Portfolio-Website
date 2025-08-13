@@ -5,9 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alarm Clock</title>
     <link rel="stylesheet" href="alarm.css">
+    <script src="https://kit.fontawesome.com/348bedc32f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    <section class="alarm-widget" id="alarm-widget">
+
+        <!-- Draggable Header and Exit Button -->
+        <section class="header" id="alarm-widget-header">
+            <div id="exit-box"></div>
+            <h3> Alarm Clock </h3>
+            <!-- THIS DIV IS JUST HERE FOR SPACING PURPOSES -->
+            <div></div> 
+            <!-- THIS DIV IS JUST HERE FOR SPACING PURPOSES -->
+        </section>
+
+        <section class="alarm-widget-body" id="alarm-widget-body">
+
+            <div id="display"></div>
+            <div class="choice-section" id="selection-container">
+                <button class="selection active" id="time">
+                    <i class="fa-regular fa-clock"></i>
+                </button>
+                <button class="selection" id="date">
+                    <i class="fa-regular fa-calendar"></i>
+                </button>
+                <button class="selection" id="alarm">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+            </div>
+
+        </section>
+
+    </section>
     <script type="module" src="alarm.js"></script>
 </body>
 </html>
