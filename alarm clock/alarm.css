@@ -94,6 +94,69 @@ body {
   display: flex; 
 }
 
+.alarm-widget .alarm-widget-body #display #display-alarm
+{ 
+  justify-content: space-around;
+  align-items: center;
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch 
+{ 
+  position: relative;
+  display: inline-block; 
+  width: 1.5vh; 
+  height: 3.5vh; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch input 
+{ 
+ display: none; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch .slider
+{ 
+  position: absolute;
+  cursor: pointer; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  background-color: white;
+  border: black 0.20vh solid; 
+  -webkit-transition: .4s;
+  transition: .4s; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch .slider::before
+{ 
+  position: absolute; 
+  content: " "; 
+  height: 1.15vh; 
+  width: 1.10vh; 
+  left: 0; 
+  bottom: 0; 
+  background-color: black;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-top: 0.2vh black solid; 
+  border-bottom: none
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch input:checked + .slider{ 
+  background-color: black; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .switch input:checked + .slider::before
+{ 
+  background-color: white;
+  -webkit-transform: translateY(-1.75vh);
+  -ms-transform: translateY(-1.75vh); 
+  tranform: translateY(-1.75vh); 
+  border-top: none; 
+  border-bottom: 0.2vh black solid; 
+}
+
+
 .alarm-widget .alarm-widget-body #selection-container 
 { 
   border: black solid 3px; 
