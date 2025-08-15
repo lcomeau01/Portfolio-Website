@@ -30,9 +30,21 @@
                         <input type="checkbox">
                         <span class = "slider"></span>
                     </label>
+
                     <!-- time input goes here -->
+                    <section class="setAlarm">
+                        <input type="text" class="alarmTime" id="hour" value="12" maxlength="2"> :
+                        <input type="text" class="alarmTime" id="minute" value="00" maxlength="2"> : 
+                        <input type="text" class="alarmTime" id="second" value="00" maxlength="2">
+                        <input type="text" readonly class="alarmTime" id="meridiem" value="AM">
+                    </section>
 
                     <!-- buttons go here  -->
+                     <section class="upDownButtons">
+                        <i class="fa-solid fa-arrow-up" id="up"></i>
+                        <i class="fa-solid fa-arrow-down" id="down"></i>
+                     </section>
+                     
                 </section>
             </div>
             <div class="choice-section" id="selection-container">

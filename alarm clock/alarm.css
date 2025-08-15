@@ -96,6 +96,8 @@ body {
 
 .alarm-widget .alarm-widget-body #display #display-alarm
 { 
+  width: 100%; 
+  height: 100%; 
   justify-content: space-around;
   align-items: center;
 }
@@ -138,7 +140,6 @@ body {
   background-color: black;
   -webkit-transition: .4s;
   transition: .4s;
-  border-top: 0.2vh black solid; 
   border-bottom: none
 }
 
@@ -149,13 +150,51 @@ body {
 .alarm-widget .alarm-widget-body #display #display-alarm .switch input:checked + .slider::before
 { 
   background-color: white;
-  -webkit-transform: translateY(-1.75vh);
-  -ms-transform: translateY(-1.75vh); 
-  tranform: translateY(-1.75vh); 
+  -webkit-transform: translateY(-2vh);
+  -ms-transform: translateY(-2vh); 
+  tranform: translateY(-2vh); 
   border-top: none; 
-  border-bottom: 0.2vh black solid; 
 }
 
+.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm
+{ 
+  width: 60%; 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  margin: 0px; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input
+{ 
+  width: 4vh; 
+  font-size: 2.5vh;
+  border: none; 
+  padding: 0px; 
+  margin-left: 5px; 
+  color: black;
+  cursor: pointer; 
+}
+.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input#meridiem
+{ 
+  width: 5vh; 
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input:focus
+{ 
+  background-color: black;
+  color: white; 
+  border: black solid 0.5px; 
+  outline: black solid 0.5px; 
+  cursor: pointer;
+  caret-color: transparent;
+}
+
+.alarm-widget .alarm-widget-body #display #display-alarm .upDownButtons
+{ 
+  font-size: 1.75vh;
+  border: black solid 1px; 
+}
 
 .alarm-widget .alarm-widget-body #selection-container 
 { 
