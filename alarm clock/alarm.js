@@ -17,6 +17,7 @@ closeWidget(alarm);
 // display functions / information 
 startClock(document.getElementById("display-time")); 
 startCalendar(document.getElementById("date")); 
+startAlarm(); 
 
 
 buttons.forEach(function (elem) { 
@@ -73,6 +74,23 @@ function startCalendar(button)
         // console.log(currentTarget); 
 
         elem.innerText = month + "/" + day + "/" + year; 
+    }
+}
+
+function startAlarm()
+{ 
+    const alarmCheckbox = document.getElementById("alarm-switch"); 
+    const alarmIcon = document.getElementById("alarm"); 
+    var alarmTimer, hour, minute, second, meridiem; 
+
+    alarmCheckbox.addEventListener("click", alarmStateChanged); 
+
+    function alarmStateChanged()
+    { 
+        // also set alarm 
+        // and then unset alarm via clearTimeout 
+        if(alarmCheckbox.checked) alarmIcon.classList.add("alarm-on"); 
+        else alarmIcon.classList.remove("alarm-on"); 
     }
 }
 

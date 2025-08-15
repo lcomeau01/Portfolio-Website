@@ -27,15 +27,15 @@
                 <section id="display-alarm" class="">
                     <!-- switch goes here -->
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="alarm-switch">
                         <span class = "slider"></span>
                     </label>
 
                     <!-- time input goes here -->
                     <section class="setAlarm">
-                        <input type="text" class="alarmTime" id="hour" value="12" maxlength="2"> :
-                        <input type="text" class="alarmTime" id="minute" value="00" maxlength="2"> : 
-                        <input type="text" class="alarmTime" id="second" value="00" maxlength="2">
+                        <input type="text" readonly class="alarmTime" id="hour" value="12" maxlength="2"> :
+                        <input type="text" readonly class="alarmTime" id="minute" value="00" maxlength="2"> : 
+                        <input type="text" readonly class="alarmTime" id="second" value="00" maxlength="2">
                         <input type="text" readonly class="alarmTime" id="meridiem" value="AM">
                     </section>
 
