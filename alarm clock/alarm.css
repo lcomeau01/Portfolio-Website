@@ -21,7 +21,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  border: 3px black solid; 
+  border: 1.5px black solid; 
   box-shadow: black 1vh 1svh;
 }
 
@@ -36,7 +36,7 @@ body {
   color: black; 
   font-family: 'DePixel'; 
   cursor: pointer;
-  border: black solid 3px; 
+  border: black solid 1.5px; 
 }
 
 .alarm-widget .header h3 
@@ -52,7 +52,7 @@ body {
   width: 1.5vh; 
   height: 1.5vh; 
   cursor: pointer;
-  border: solid 3px black; 
+  border: solid 2px black; 
   font-size: 1vh;
   color: black; 
   overflow: hidden;
@@ -73,7 +73,7 @@ body {
 { 
   height: 30%; 
   width: 100%; 
-  border: 3px black solid; 
+  border: 1.5px black solid; 
   border-bottom: none;
   display: flex; 
   justify-content: center;
@@ -98,7 +98,7 @@ body {
 { 
   width: 100%; 
   height: 100%; 
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -134,7 +134,7 @@ body {
   position: absolute; 
   content: " "; 
   height: 1.15vh; 
-  width: 1.10vh; 
+  width: 1.15vh; 
   left: 0; 
   bottom: 0; 
   background-color: black;
@@ -167,17 +167,18 @@ body {
 
 .alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input
 { 
-  width: 4vh; 
-  font-size: 2.5vh;
+  width: 4.5vh; 
+  font-size: 3.5vh;
   border: none; 
   padding: 0px; 
   margin-left: 5px; 
   color: black;
   cursor: pointer; 
+  font-weight: bold;
 }
 .alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input#meridiem
 { 
-  width: 5vh; 
+  width: 6vh; 
 }
 
 .alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input:focus
@@ -194,11 +195,18 @@ body {
 { 
   font-size: 1.75vh;
   border: black solid 1px; 
+  display: flex; 
+  flex-direction: column;
+  height: 70%; 
+  justify-content: space-around;
+  padding: 0.25vh; 
+  border-radius: 0.40vh;
+  cursor: pointer;
 }
 
 .alarm-widget .alarm-widget-body #selection-container 
 { 
-  border: black solid 3px; 
+  border: black solid 1.5px; 
   height: 70%; 
   width: 100%; 
   display: flex; 
@@ -211,10 +219,9 @@ body {
   display: flex; 
   justify-content: center;
   align-items: center;
-  border: 3px; 
   width: 100%; 
   height: 100%; 
-  border: black solid 3px; 
+  border: black solid 1.5px; 
   background-color: white;
   cursor: pointer;
 }
@@ -236,3 +243,10 @@ body {
 { 
     color: white; 
 }
+
+.selection#alarm.alarm-on .fa-regular
+{ 
+    color: red; 
+}
+
+
