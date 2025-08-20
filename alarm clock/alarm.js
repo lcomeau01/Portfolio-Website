@@ -5,6 +5,7 @@ import { closeWidget } from "../close.js"
 // const global variables 
 const alarm = document.getElementById("alarm-widget"); 
 const buttons = ['time', 'date', 'alarm']; 
+const beep =  new Audio('../beep.mp3');
 
 // default (global) values when the widget is first opened 
 var currentActive = document.getElementById('time'); 
@@ -71,7 +72,7 @@ function startCalendar(button)
         let month = currTime.getMonth() + 1; 
         let year = currTime.getFullYear(); 
 
-        // console.log(currentTarget); 
+        
 
         elem.innerText = month + "/" + day + "/" + year; 
     }
@@ -81,36 +82,36 @@ function startAlarm()
 { 
     const alarmCheckbox = document.getElementById("alarm-switch"); 
     const alarmIcon = document.getElementById("alarm"); 
-    var alarmTimer, alarmInputs, hour, minute, second, meridiem, focusedTime; 
+    var alarmTimer, alarmInputs, focusedTime; 
 
     alarmCheckbox.addEventListener("click", alarmStateChanged); 
     alarmInputs = document.getElementsByClassName('alarmTime'); 
 
     Array.from(alarmInputs).forEach( (elem) => {
-        elem.addEventListener("focusin", changeAlarmFocus); 
+        elem.addEventListener("focusin", alarmFocusIn); 
         elem.addEventListener("keydown", enteringTime); 
         elem.addEventListener("focusout", verifyTime); 
     }); 
 
     function alarmStateChanged()
     { 
-        // also set alarm 
-        // and then unset alarm via clearTimeout 
-        if(alarmCheckbox.checked) alarmIcon.classList.add("alarm-on"); 
-        else alarmIcon.classList.remove("alarm-on"); 
+        if(alarmCheckbox.checked) 
+        { 
+            alarmIcon.classList.add("alarm-on"); 
+            turnAlarmOn(); 
+        }
+        else 
+        { 
+            alarmIcon.classList.remove("alarm-on"); 
+            turnAlarmOff(); 
+        }
     }
 
-    function changeAlarmFocus(event)
+    function alarmFocusIn(event)
     { 
         if (focusedTime != null) 
         { 
-            focusedTime.classList.remove('active'); 
-
-            if(focusedTime.id == event.currentTarget.id) 
-            { 
-                focusedTime = null; 
-                return; 
-            }
+            focusedTime.classList.remove('active');
         }
 
         focusedTime = event.currentTarget; 
@@ -118,19 +119,31 @@ function startAlarm()
     
     }
 
+    function alarmFocusOut(event)
+    { 
+        if(focusedTime != null)
+        { 
+            focusedTime.classList.remove('active');
+            focusedTime = null; 
+            return; 
+        }
+    }
+
     function enteringTime(event)
     { 
         if(focusedTime == null) return; 
-        console.log(event.key); 
+        if (alarmCheckbox.checked) return; 
+        
         let currTime = focusedTime.value; 
         let key = event.key;
 
         if(key == "Backspace") currTime = currTime.slice(0, -1);
         else if (focusedTime.id == 'meridiem')
         { 
-            if(key.toUpperCase() == "P" || key == "ArrowDown") focusedTime.value = "PM"; 
-            else if (key.toUpperCase() == "A" || key == "ArrowUp") focusedTime.value = "AM"; 
-            
+            if(key.toUpperCase() == "P") focusedTime.value = "PM"; 
+            else if (key.toUpperCase() == "A") focusedTime.value = "AM"; 
+            else if (key === "ArrowUp" || key === "ArrowDown") focusedTime.value = currTime === "PM" ? "AM" : "PM";
+
             return; 
         }
         else if (key == "ArrowUp")
@@ -154,19 +167,33 @@ function startAlarm()
         }
 
         focusedTime.value = currTime.padStart(2, "0"); 
-    }``
+    }
 
 
     function verifyTime(event)
     {  
-        console.log(event.target); 
+        // the DOM obj clicked causing the section of the alarm to unfocus 
+        let objClicked = event.relatedTarget; 
+
+        // if that object is an up or down arrow, skip all this and simply add 
+        // or subtract one (1) from the current focused section of the alarm 
+        if(objClicked != null)
+        { 
+            if(objClicked.firstChild) objClicked = objClicked.firstChild.id; 
+            if(objClicked == "up" || objClicked == "down") 
+            { 
+                arrowClicked(objClicked, event); 
+                return; 
+            }
+        } 
+
         let currTime = parseInt(focusedTime.value); 
         
         // making sure that it fits to the perameters of min, sec, hour 
         // aka they have to be between 0 and 60 or 0 and 12
         if(focusedTime.id == "meridiem") 
         { 
-            changeAlarmFocus(event); 
+            alarmFocusOut(event); 
             return; 
         }
         else if(focusedTime.id != "hour")
@@ -185,7 +212,68 @@ function startAlarm()
 
         // we don't want the part of the alarm to be active anymore
         // since it is going out of focus
-        changeAlarmFocus(event); 
+        alarmFocusOut(event); 
+    }
+
+    function arrowClicked(direction, event)
+    { 
+        // edge case of trying to change the alarm after it was set 
+        if (alarmCheckbox.checked) return; 
+        let change; 
+
+        if (direction == 'up') change = 1; 
+        else change = -1; 
+
+        focusedTime.value = parseInt(focusedTime.value) + change; 
+        if (focusedTime.value < 0) focusedTime.value = 0; 
+        focusedTime.value = focusedTime.value.toString().padStart(2, "0");
+        
+        // focus on the last focused time 
+        // we don't actually want to switch focus to the button 
+        // we want to use it to increment / decrement the current time 
+        focusedTime.focus(); 
+    }
+
+    function turnAlarmOn()
+    { 
+        let alarmParts = ["hour", "minute", "second", "meridiem"]; 
+        let alarmValues = {}; 
+        
+        alarmParts.forEach((part) => { 
+            if(part == "meridiem") alarmValues[part] = document.getElementById(part).value; 
+            else alarmValues[part] = parseInt(document.getElementById(part).value); 
+        }); 
+
+        // make PM into 24 hour style for Date obj purposes 
+        // take care of 12 AM and PM edge cases 
+        if (alarmValues.meridiem == "PM" && alarmValues.hour != 12) {
+            alarmValues.hour = (alarmValues.hour + 12) % 24;
+        }
+        if (alarmValues.meridiem == "AM" && alarmValues.hour == 12) {
+            alarmValues.hour = 0;
+        }
+
+        const now = new Date(), targetTime = new Date(); 
+        
+        targetTime.setHours(alarmValues.hour, alarmValues.minute, alarmValues.second); 
+        
+        // get the delay between the set time and the current time
+        // if it is negative, that means it will be for tomorrow, and 
+        // we should add a days worth of seconds to the delay 
+        let delay = targetTime.getTime() - now.getTime(); 
+        if(delay < 0) delay += 86400000; 
+
+        alarmTimer = setTimeout(() => {beep.play();
+            console.log("ALARM"); 
+            alarmCheckbox.checked = false; 
+            alarmStateChanged(); 
+        }, delay); 
+    }
+
+    function turnAlarmOff()
+    { 
+        clearTimeout(alarmTimer); 
+        console.log("alarm turned off"); 
     }
 }
 
