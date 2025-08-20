@@ -264,7 +264,6 @@ function startAlarm()
         if(delay < 0) delay += 86400000; 
 
         alarmTimer = setTimeout(() => {beep.play();
-            console.log("ALARM"); 
             alarmCheckbox.checked = false; 
             alarmStateChanged(); 
         }, delay); 
@@ -273,7 +272,6 @@ function startAlarm()
     function turnAlarmOff()
     { 
         clearTimeout(alarmTimer); 
-        console.log("alarm turned off"); 
     }
 }
 
