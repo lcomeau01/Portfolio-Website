@@ -81,7 +81,7 @@ function startCalendar(button)
 function startAlarm()
 { 
     const alarmCheckbox = document.getElementById("alarm-switch"); 
-    const alarmIcon = document.getElementById("alarm"); 
+    const alarmIcon = document.getElementById("alarm-icon");  
     var alarmTimer, alarmInputs, focusedTime; 
 
     alarmCheckbox.addEventListener("click", alarmStateChanged); 
@@ -97,12 +97,14 @@ function startAlarm()
     { 
         if(alarmCheckbox.checked) 
         { 
-            alarmIcon.classList.add("alarm-on"); 
+            alarmIcon.classList.add("fa-bell"); 
+            alarmIcon.classList.remove("fa-bell-slash"); 
             turnAlarmOn(); 
         }
         else 
         { 
-            alarmIcon.classList.remove("alarm-on"); 
+            alarmIcon.classList.remove("fa-bell"); 
+            alarmIcon.classList.add("fa-bell-slash"); 
             turnAlarmOff(); 
         }
     }
