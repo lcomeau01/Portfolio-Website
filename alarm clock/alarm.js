@@ -102,7 +102,16 @@ function startAlarm()
 
     function changeAlarmFocus(event)
     { 
-        if (focusedTime != null) focusedTime.classList.remove("active");
+        if (focusedTime != null) 
+        { 
+            focusedTime.classList.remove('active'); 
+
+            if(focusedTime.id == event.currentTarget.id) 
+            { 
+                focusedTime = null; 
+                return; 
+            }
+        }
 
         focusedTime = event.currentTarget; 
         focusedTime.classList.add("active"); 
@@ -124,6 +133,18 @@ function startAlarm()
             
             return; 
         }
+        else if (key == "ArrowUp")
+        { 
+            currTime = parseInt(currTime) + 1; 
+            currTime = currTime.toString(); 
+        }
+        else if (key == "ArrowDown")
+        { 
+            currTime = parseInt(currTime) - 1; 
+
+            if (currTime < 0) currTime = "0"
+            else currTime = currTime.toString();
+        }
         else 
         { 
             key = parseInt(key); 
@@ -133,14 +154,22 @@ function startAlarm()
         }
 
         focusedTime.value = currTime.padStart(2, "0"); 
-    }
+    }``
+
 
     function verifyTime(event)
-    { 
+    {  
+        console.log(event.target); 
         let currTime = parseInt(focusedTime.value); 
         
-        if(focusedTime.id == "meridiem") return; 
-        else if(focusedTime.id != hour)
+        // making sure that it fits to the perameters of min, sec, hour 
+        // aka they have to be between 0 and 60 or 0 and 12
+        if(focusedTime.id == "meridiem") 
+        { 
+            changeAlarmFocus(event); 
+            return; 
+        }
+        else if(focusedTime.id != "hour")
         { 
             currTime = currTime % 60; 
         }
@@ -149,12 +178,14 @@ function startAlarm()
             currTime = currTime % 12; 
             if(currTime == 0) currTime = 12; 
         }
-        
+
+        // what the value of the focused part of the clock will be 
+        // when it leaves focus 
         focusedTime.value = currTime.toString().padStart(2, "0"); 
 
-        // there is no focused section of the alarm anymore 
-        focusedTime.classList.remove("active"); 
-        focusedTime = null; 
+        // we don't want the part of the alarm to be active anymore
+        // since it is going out of focus
+        changeAlarmFocus(event); 
     }
 }
 
