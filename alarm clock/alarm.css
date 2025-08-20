@@ -167,7 +167,7 @@ body {
 
 .alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input
 { 
-  width: 4.5vh; 
+  width: 5vh; 
   font-size: 3.5vh;
   border: none; 
   padding: 0px; 
@@ -178,10 +178,10 @@ body {
 }
 .alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input#meridiem
 { 
-  width: 6vh; 
+  width: 7vh; 
 }
 
-.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input:focus
+.alarm-widget .alarm-widget-body #display #display-alarm .setAlarm input.active
 { 
   background-color: black;
   color: white; 
