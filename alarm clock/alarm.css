@@ -204,6 +204,16 @@ body {
   cursor: pointer;
 }
 
+.alarm-widget .alarm-widget-body #display #display-alarm .upDownButtons button {
+  all: unset; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: inherit; 
+}
+
+
 .alarm-widget .alarm-widget-body #selection-container 
 { 
   border: black solid 1.5px; 
