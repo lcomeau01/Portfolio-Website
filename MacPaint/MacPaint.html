@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MacPaint</title>
     <link rel="stylesheet" href="MacPaint.css">
+    <!-- for fontawesome icons -- which are free use -->
+    <script src="https://kit.fontawesome.com/348bedc32f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <section class="MacPaint-Widget">
+    <section class="MacPaint-widget" id="MacPaint-widget">
         <!-- MacPaint Untitled Window -->
         <!-- MacPaint painting options -->
         <!-- Stroke Width Options -->
         <!-- Color Options (different shades of grey) -->
+         <section class="tools" id="tools-container"></section>
+         <section class="canvas" id="canvas-container">
+            <header class="header" id="MacPaint-widget-header">
+                <div id="exit-box"></div>
+                <div id="title">
+                    <h3>untilted</h3>
+                </div>
+            </header>
+            <canvas id="untilted-painting"></canvas>
+         </section>
+         <section class="strokes-selection" id="strokes-container"></section>
+         <section class="colors-selection" id="colors-container"></section>
     </section>
 </body>
 <script type="module" src="MacPaint.js"></script>
