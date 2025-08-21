@@ -1,0 +1,117 @@
+html, body { 
+    width: 100%; 
+    height: 100%;
+}
+
+body 
+{ 
+    background-image: url('../background.png');
+    background-repeat: repeat; 
+    background-size: 0.5%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.MacPaint-widget
+{ 
+    position: absolute;
+    width: 90vh; 
+    height: 50vh; 
+    display: grid; 
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 1vh; 
+}
+
+.MacPaint-widget .tools
+{ 
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 5; 
+
+    background-color: blue;
+}
+
+.MacPaint-widget .canvas
+{ 
+    grid-column-start: 3;
+    grid-column-end: 8;
+    grid-row-start: 1;
+    grid-row-end: 5; 
+
+    background-color: white;
+    border: black 1px solid; 
+    box-shadow: black 3px 3px 0px;
+}
+
+.MacPaint-widget .strokes-selection
+{ 
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 8; 
+
+    background-color: green;
+}
+
+.MacPaint-widget .colors-selection
+{ 
+    grid-column-start: 3;
+    grid-column-end: 8;
+    grid-row-start: 5;
+    grid-row-end: 8; 
+
+    background-color: aqua;
+}
+
+.MacPaint-widget .canvas .header
+{ 
+  display: flex; 
+  align-items: center;
+  justify-content: flex-start; 
+  height: 10%; 
+  width: 100%; 
+  background-color: black; 
+  background-image: linear-gradient(to bottom, white 0%, white 0.25vh, transparent 2px, transparent 5px);
+  background-size: 100% 12%;
+  box-shadow: 0 0 0 0.5vh white inset;
+  color: white; 
+  font-family: 'DePixel'; 
+  cursor: pointer;
+  border-bottom: black solid 3px; 
+}
+
+.MacPaint-widget .canvas .header #title
+{ 
+    width: 90%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.MacPaint-widget .canvas .header h3{ 
+    background-color: white;
+    color: black; 
+    padding: 0px 5px; 
+    margin: 0px; 
+    font-size: 3vh; 
+}
+
+.MacPaint-widget .canvas .header #exit-box
+{ 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 3vh; 
+    height: 3vh; 
+    cursor: pointer;
+    box-shadow: 0 0 0 0.25vh black inset;
+    border: solid 0.25vh white; 
+    font-size: 1.25vh;
+    color: black; 
+    overflow: hidden;
+    background-color: white;
+    margin-left: 1vw; 
+}
