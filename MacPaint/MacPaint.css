@@ -88,6 +88,18 @@ body
     background-color:  black; 
 }
 
+.MacPaint-widget .tools button.selected > div
+{ 
+    background-color: white !important;
+    border: 1px solid white; 
+}
+
+.MacPaint-widget .tools button.selected
+{ 
+    background-color: black;
+    color: white; 
+}
+
 .MacPaint-widget .tools button #line-icon
 { 
     width: 4vh;
