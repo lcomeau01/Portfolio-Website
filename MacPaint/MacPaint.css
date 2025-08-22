@@ -19,53 +19,197 @@ body
     width: 90vh; 
     height: 50vh; 
     display: grid; 
-    grid-template-rows: auto auto auto auto auto auto auto;
-    grid-template-columns: auto auto auto auto auto auto auto;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     gap: 1vh; 
 }
 
 .MacPaint-widget .tools
 { 
     grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 5; 
-
-    background-color: blue;
-}
-
-.MacPaint-widget .canvas
-{ 
-    grid-column-start: 3;
-    grid-column-end: 8;
+    grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 5; 
 
     background-color: white;
     border: black 1px solid; 
     box-shadow: black 3px 3px 0px;
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr); 
+}
+
+.MacPaint-widget .tools button
+{ 
+    all: unset; 
+    
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    border: black 1px solid;
+    
+    font-size: 3vh;
+    cursor: pointer; 
+}
+
+.MacPaint-widget .tools button #emptySquare-icon
+{ 
+    width: 4vh; 
+    height: 3vh; 
+
+    border: 1px dashed black; 
+}
+
+.MacPaint-widget .tools button #filledSquare-icon
+{ 
+    width: 4vh; 
+    height: 3vh; 
+
+    border: 1px solid black; 
+    background-color:  black; 
+}
+
+.MacPaint-widget .tools button #emptyCircle-icon
+{ 
+    width: 4vh; 
+    height: 3vh; 
+
+    border: 1px dashed black; 
+    border-radius: 50%;
+}
+
+.MacPaint-widget .tools button #filledCircle-icon
+{ 
+    width: 4vh; 
+    height: 3vh; 
+
+    border: 1px solid black; 
+    border-radius: 50%;
+    background-color:  black; 
+}
+
+.MacPaint-widget .tools button #line-icon
+{ 
+    width: 4vh;
+    height: 0.3vh;
+    background-color: black;
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+.MacPaint-widget .canvas
+{ 
+    grid-column-start: 2;
+    grid-column-end: 8;
+    grid-row-start: 1;
+    grid-row-end: 6; 
+
+    background-color: white;
+    border: black 1px solid; 
+    box-shadow: black 3px 3px 0px;
+
+    cursor: cell;
 }
 
 .MacPaint-widget .strokes-selection
 { 
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 2;
     grid-row-start: 5;
     grid-row-end: 8; 
 
-    background-color: green;
+    background-color: white;
+    border: black 1px solid; 
+    box-shadow: black 3px 3px 0px;
+    display: grid; 
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr); 
+}
+
+.MacPaint-widget .strokes-selection button 
+{ 
+    all: unset; 
+    
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+
+    cursor: pointer;
+
+    color: white; 
+}
+
+.MacPaint-widget .strokes-selection button .strokes-icon
+{ 
+    width: 60%; 
+    height: 0; 
+    border-top: black solid;
+}
+
+.MacPaint-widget .strokes-selection button.selected
+{ 
+    color: black; 
+}
+
+.MacPaint-widget .strokes-selection button .strokes-icon#dashed
+{ 
+    border-style: dashed;
 }
 
 .MacPaint-widget .colors-selection
 { 
-    grid-column-start: 3;
+    grid-column-start: 2;
     grid-column-end: 8;
-    grid-row-start: 5;
+    grid-row-start: 6;
     grid-row-end: 8; 
 
-    background-color: aqua;
+    background-color: white;
+    border: black 1px solid !; 
+    box-shadow: black 3px 3px 0px;
+
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, 1fr); 
 }
 
+.MacPaint-widget .colors-selection #selected-color-container
+{ 
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+    border: black 1px solid; 
+    border-bottom: transparent;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.MacPaint-widget .colors-selection #selected-color-container #selected-color-window
+{ 
+    width: 50%; 
+    height: 50%; 
+
+    border: 1px solid black; 
+}
+
+.MacPaint-widget .colors-selection .color-icon
+{ 
+    all: unset; 
+
+    border-top: black solid 1px; 
+    border-right: black solid 1px; 
+    box-sizing: border-box;
+
+    cursor: pointer;
+}
+
+
+
+
+/********************** HEADER *************************/
 .MacPaint-widget .canvas .header
 { 
   display: flex; 
@@ -79,7 +223,7 @@ body
   box-shadow: 0 0 0 0.5vh white inset;
   color: white; 
   font-family: 'DePixel'; 
-  cursor: pointer;
+  cursor: grab;
   border-bottom: black solid 3px; 
 }
 
@@ -115,3 +259,6 @@ body
     background-color: white;
     margin-left: 1vw; 
 }
+
+
+
