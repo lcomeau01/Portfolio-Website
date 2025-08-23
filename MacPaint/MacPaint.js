@@ -6,6 +6,9 @@ dragElement(paintWidget);
 closeWidget(paintWidget);
 
 
+let canvas = document.getElementById("untilted-painting"); 
+let lastX = 0, lastY = 0, currX = 0, currY = 0; 
+
 
 // Tool Selection Global Variables 
 const toolsContainer = document.getElementById("tools-container"); 
@@ -20,6 +23,7 @@ const strokes = ["dashed", "solid1", "solid2", "solid3", "solid4"];
 const strokeWidths = {"dashed": 1, "solid1": 1, "solid2": 3, "solid3": 5, "solid4": 10}; 
 const strokeSelectedIcon = '<i class="fa-solid fa-check"></i>'; 
 let selectedStroke = "solid2"; // default selected stroke 
+let erasing = false; 
 
 // Color Selection Global Variables 
 const colorsContainer = document.getElementById("colors-container"); 
@@ -37,9 +41,6 @@ colorPallete();
 /********************** different selections set up ************************/
 function toolBar() 
 { 
-    // clear any previous toolBar drawn 
-    toolsContainer.innerHTML = ""; 
-    
     // now create a new one 
     tools.forEach((elem) => {
         const toolButton = document.createElement("button"); 
@@ -110,9 +111,15 @@ function colorPallete()
 
 function toolSelected(event)
 { 
+    // unset all drawing functions and event listeners related to the former tool choice 
+    unsetTool(); 
+
     document.getElementById(selectedTool).classList.remove("selected"); 
     selectedTool = event.currentTarget.id; 
     document.getElementById(selectedTool).classList.add("selected"); 
+
+    // set all drawing functions and event listeners related to current tool choice 
+    setTool();  
 }
 
 function strokeSelected(event)
@@ -127,3 +134,43 @@ function colorSelected(event)
     selectedColor = event.currentTarget.id; 
     selectedColorWindow.style.backgroundColor = selectedColor; 
 }
+
+/************* event listeners for each selection user can make *************/
+
+
+/************* drawing functions for each drawing tool *************/
+function setTool()
+{ 
+    if(selectedTool == 'pen') startDrawing(); 
+    else if (selectedTool == 'eraser') startErasing(); 
+    
+}
+
+function unsetTool()
+{ 
+    if (selectedTool == 'pen') return; 
+    else if (selectedTool == 'eraser') erasing = false; 
+    return; 
+}
+
+function startDrawing()
+{ 
+    let color = erasing ? "#ffffff" : selectedColor; 
+    erasing ? console.log("eraser picked") : console.log("pen picked"); 
+
+    canvas.addEventListener('mousedown', penDown); 
+    canvas.addEventListener('mousemove', penMove); 
+    canvas.addEventListener('mouseup', penUp); 
+}
+
+function penDown(event)
+{ 
+    
+}
+
+function startErasing()
+{ 
+    erasing = true; 
+    startDrawing(); 
+}
+
