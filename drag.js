@@ -18,13 +18,15 @@ export function dragElement(elmnt)
         pos4 = e.clientY; 
         document.onmouseup = closeDragElement; 
 
+        // change the mouse to show the user that it is holding the header 
+        header.style.cursor = "grabbing"; 
+
         // call a function when the cursor moves (when it is selecting the header)
         document.onmousemove = elementDrag; 
     }
 
     function elementDrag(e)
     { 
-        header.style.cursor = "grabbing"; 
 
         e = e || window.event; 
         e.preventDefault(); 
