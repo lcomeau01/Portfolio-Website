@@ -7,7 +7,14 @@ closeWidget(paintWidget);
 
 
 let canvas = document.getElementById("untilted-painting"); 
+canvas.width = canvas.offsetWidth; 
+canvas.height = canvas.offsetHeight;
+const ctx = canvas.getContext('2d'); 
+
+let canvasDimensions = canvas.getBoundingClientRect(); 
 let lastX = 0, lastY = 0, currX = 0, currY = 0; 
+let drawing = false; 
+let color = "#ffffff"; 
 
 
 // Tool Selection Global Variables 
@@ -23,6 +30,7 @@ const strokes = ["dashed", "solid1", "solid2", "solid3", "solid4"];
 const strokeWidths = {"dashed": 1, "solid1": 1, "solid2": 3, "solid3": 5, "solid4": 10}; 
 const strokeSelectedIcon = '<i class="fa-solid fa-check"></i>'; 
 let selectedStroke = "solid2"; // default selected stroke 
+let selectedStrokeStyle = "solid"; 
 let erasing = false; 
 
 // Color Selection Global Variables 
@@ -36,6 +44,7 @@ let selectedColor = "#555555"; //default selected color
 toolBar(); 
 strokeWidth(); 
 colorPallete(); 
+setTool(); 
 
 
 /********************** different selections set up ************************/
@@ -73,6 +82,8 @@ function strokeWidth()
         const strokesIcon = document.createElement("div"); 
         strokesIcon.className = "strokes-icon";
         strokesIcon.style.borderWidth = strokeWidths[elem] + "px"; 
+        
+        if(elem == "dashed") strokesIcon.style.borderStyle = "dashed"; 
 
         strokesButton.innerHTML = strokeSelectedIcon; 
 
@@ -126,6 +137,7 @@ function strokeSelected(event)
 { 
     document.getElementById(selectedStroke).classList.remove("selected"); 
     selectedStroke = event.currentTarget.id; 
+    selectedStrokeStyle = (selectedStroke  == "dashed") ? "dashed" : "solid"; 
     document.getElementById(selectedStroke).classList.add("selected"); 
 }
 
@@ -143,19 +155,26 @@ function setTool()
 { 
     if(selectedTool == 'pen') startDrawing(); 
     else if (selectedTool == 'eraser') startErasing(); 
+    else if (selectedTool == 'emptySquare') startRectangle(false); 
+    else if (selectedTool == 'filledSquare') startRectangle(true); 
     
 }
 
 function unsetTool()
 { 
-    if (selectedTool == 'pen') return; 
-    else if (selectedTool == 'eraser') erasing = false; 
+    if (selectedTool == 'pen') stopDrawing(); 
+    else if (selectedTool == 'eraser') stopErasing(); 
+    else if (selectedTool == 'emptySquare') stopRect(); 
+    else if (selectedTool == 'filledSquare') stopRect(); 
     return; 
 }
 
+
+/************** PEN AND ERASER FUNCTIONS *************/
+
 function startDrawing()
 { 
-    let color = erasing ? "#ffffff" : selectedColor; 
+    color = erasing ? "#ffffff" : selectedColor; 
     erasing ? console.log("eraser picked") : console.log("pen picked"); 
 
     canvas.addEventListener('mousedown', penDown); 
@@ -165,7 +184,46 @@ function startDrawing()
 
 function penDown(event)
 { 
-    
+
+    color = erasing ? "#ffffff" : selectedColor; 
+    canvasDimensions = canvas.getBoundingClientRect();  // the window may have moved since last time drawn 
+
+
+    lastX = event.clientX - canvasDimensions.left; 
+    lastY = event.clientY - canvasDimensions.top;  
+    drawing = true; 
+}
+
+function penMove(event)
+{ 
+    if(!drawing) return; 
+
+    currX = event.clientX - canvasDimensions.left; 
+    currY = event.clientY - canvasDimensions.top; 
+
+    ctx.beginPath(); 
+    ctx.moveTo(lastX, lastY); 
+    ctx.lineTo(currX, currY); 
+    ctx.strokeStyle = color; 
+    ctx.lineWidth = strokeWidths[selectedStroke]; 
+    if(selectedStrokeStyle == "dashed") ctx.setLineDash([5, 5]); 
+    ctx.lineCap = 'round'; 
+    ctx.stroke(); 
+
+    lastX = currX; 
+    lastY = currY; 
+}
+
+function penUp(event)
+{ 
+    drawing = false; 
+}
+
+function stopDrawing()
+{ 
+    canvas.removeEventListener('mousedown', penDown); 
+    canvas.removeEventListener('mousemove', penMove); 
+    canvas.removeEventListener('mouseup', penUp); 
 }
 
 function startErasing()
@@ -173,4 +231,73 @@ function startErasing()
     erasing = true; 
     startDrawing(); 
 }
+
+function stopErasing()
+{ 
+    erasing = false; 
+    stopDrawing(); 
+}
+
+/************** PEN AND ERASER FUNCTIONS *************/
+
+/*********************** RECTANGLE FUNCTIONS ***********************/
+let filled; 
+let width, height; 
+
+function startRectangle(rectType)
+{ 
+    filled = rectType; 
+    canvas.addEventListener('mousedown', rectDown); 
+    canvas.addEventListener('mousemove', rectMove); 
+    canvas.addEventListener('mouseup', rectUp); 
+}
+
+function rectDown(event)
+{ 
+    canvasDimensions = canvas.getBoundingClientRect();  // the window may have moved since last time drawn 
+    color = selectedColor; 
+
+    lastX = event.clientX - canvasDimensions.left; 
+    lastY = event.clientY - canvasDimensions.top;  
+    width = 0; 
+    height = 0; 
+    drawing = true; 
+}
+
+function rectMove(event)
+{ 
+    if(!drawing) return; 
+
+    ctx.clearRect(lastX - 1, lastY - 1, width + 2, height + 2); 
+
+    currX = event.clientX - canvasDimensions.left; 
+    currY = event.clientY - canvasDimensions.top; 
+    width = currX - lastX; 
+    height = currY - lastY; 
+
+    ctx.strokeStyle = color; 
+    if(filled) ctx.fillStyle = color; 
+
+    if(filled) ctx.fillRect(lastX, lastY, width, height); 
+    else 
+    { 
+        ctx.beginPath(); 
+        ctx.rect(lastX, lastY, width, height); 
+        ctx.stroke(); 
+    }
+
+}
+
+function rectUp(event)
+{  
+    drawing = false; 
+}
+
+function stopRect()
+{ 
+    canvas.removeEventListener('mousedown', rectDown); 
+    canvas.removeEventListener('mousemove', rectMove); 
+    canvas.removeEventListener('mouseup', rectUp); 
+}
+
 
