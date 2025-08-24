@@ -160,6 +160,7 @@ function setTool()
     else if (selectedTool == 'emptyCircle') startCircle(false); 
     else if (selectedTool == 'filledCircle') startCircle(true); 
     else if (selectedTool == 'line') startLine(); 
+    else startText(); 
 }
 
 function unsetTool()
@@ -171,6 +172,7 @@ function unsetTool()
     else if (selectedTool == 'emptyCircle') stopCircle();  
     else if (selectedTool == 'filledCircle') stopCircle(); 
     else if (selectedTool =='line') stopLine(); 
+    else stopText(); 
 }
 
 
@@ -435,3 +437,50 @@ function stopLine()
 }
 
 /************** LINE FUNCTIONS *************/
+
+
+
+/*********************** TEXT FUNCTIONS ***********************/
+let currText; 
+
+function startText()
+{ 
+    canvas.addEventListener('mousedown', textDown); 
+    document.addEventListener('keydown', textType); 
+}
+
+function textDown(event)
+{ 
+    canvasDimensions = canvas.getBoundingClientRect();  // the window may have moved since last time drawn 
+    color = '#000000'; 
+    currText = ""; 
+
+    currX = lastX = event.clientX - canvasDimensions.left; 
+    currY = lastY = event.clientY - canvasDimensions.top;  
+    width = 0; 
+    drawing = true; 
+}
+
+function textType(event)
+{ 
+    if(!drawing) return; 
+
+    ctx.clearRect(lastX - 10, lastY - 25, width + 10, 30); 
+ 
+    if(event.key.length == 1) currText += event.key; 
+    else if (event.key == "Backspace" && currText.length > 0) currText = currText.slice(0, -1);
+    width = ctx.measureText(currText).width + 20; 
+    ctx.font = "20px DePixel"; 
+    ctx.fillStyle = color; 
+    ctx.fillText(currText, lastX, lastY);
+
+}
+
+function stopText()
+{ 
+    drawing = false; 
+    canvas.removeEventListener('mousedown', textDown); 
+    document.removeEventListener('mousemove', textType);  
+}
+
+/*********************** TEXT FUNCTIONS ***********************/
