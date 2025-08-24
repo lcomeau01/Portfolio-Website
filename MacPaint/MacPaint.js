@@ -157,7 +157,8 @@ function setTool()
     else if (selectedTool == 'eraser') startErasing(); 
     else if (selectedTool == 'emptySquare') startRectangle(false); 
     else if (selectedTool == 'filledSquare') startRectangle(true); 
-    
+    else if (selectedTool == 'emptyCircle') startCircle(false); 
+    else if (selectedTool == 'filledCircle') startCircle(true); 
 }
 
 function unsetTool()
@@ -166,7 +167,8 @@ function unsetTool()
     else if (selectedTool == 'eraser') stopErasing(); 
     else if (selectedTool == 'emptySquare') stopRect(); 
     else if (selectedTool == 'filledSquare') stopRect(); 
-    return; 
+    else if (selectedTool == 'emptyCircle') stopCircle();  
+    else if (selectedTool == 'filledCircle') stopCircle(); 
 }
 
 
@@ -300,4 +302,63 @@ function stopRect()
     canvas.removeEventListener('mouseup', rectUp); 
 }
 
+/*********************** RECTANGLE FUNCTIONS ***********************/
 
+/*********************** CIRCLE FUNCTIONS **************************/
+let centerX, centerY; 
+function startCircle(circleType)
+{ 
+    filled = circleType; 
+    canvas.addEventListener('mousedown', circleDown); 
+    canvas.addEventListener('mousemove', circleMove); 
+    canvas.addEventListener('mouseup', circleUp); 
+}
+
+function circleDown(event)
+{ 
+    canvasDimensions = canvas.getBoundingClientRect();  // the window may have moved since last time drawn 
+    color = selectedColor; 
+
+    lastX = event.clientX - canvasDimensions.left; 
+    lastY = event.clientY - canvasDimensions.top;  
+    centerX = lastX; 
+    centerY = lastY; 
+    width = 0; 
+    drawing = true; 
+}
+
+function circleMove(event)
+{ 
+    if(!drawing) return; 
+
+    ctx.fillStyle = '#ffffff'; 
+    ctx.beginPath(); 
+    ctx.arc(centerX, centerY, width + 2, 0, Math.PI * 2); 
+    ctx.fill(); 
+
+    currX = event.clientX - canvasDimensions.left; 
+    currY = event.clientY - canvasDimensions.top; 
+    width = currX - lastX; 
+
+    ctx.strokeStyle = color; 
+    if(filled) ctx.fillStyle = color; 
+    else ctx.fillStyle = '#ffffff'; 
+
+    ctx.beginPath(); 
+    ctx.arc(centerX, centerY, width, 0, 2 * Math.PI); 
+    if (!filled) ctx.stroke();  
+    else ctx.fill(); 
+}
+
+function circleUp(event)
+{  
+    drawing = false; 
+}
+
+function stopCircle()
+{ 
+    canvas.removeEventListener('mousedown', circleDown); 
+    canvas.removeEventListener('mousemove', circleMove); 
+    canvas.removeEventListener('mouseup', circleUp); 
+}
+/*********************** CIRCLE FUNCTIONS **************************/
