@@ -159,6 +159,7 @@ function setTool()
     else if (selectedTool == 'filledSquare') startRectangle(true); 
     else if (selectedTool == 'emptyCircle') startCircle(false); 
     else if (selectedTool == 'filledCircle') startCircle(true); 
+    else if (selectedTool == 'line') startLine(); 
 }
 
 function unsetTool()
@@ -169,6 +170,7 @@ function unsetTool()
     else if (selectedTool == 'filledSquare') stopRect(); 
     else if (selectedTool == 'emptyCircle') stopCircle();  
     else if (selectedTool == 'filledCircle') stopCircle(); 
+    else if (selectedTool =='line') stopLine(); 
 }
 
 
@@ -209,6 +211,7 @@ function penMove(event)
     ctx.strokeStyle = color; 
     ctx.lineWidth = strokeWidths[selectedStroke]; 
     if(selectedStrokeStyle == "dashed") ctx.setLineDash([5, 5]); 
+    else ctx.setLineDash([]); 
     ctx.lineCap = 'round'; 
     ctx.stroke(); 
 
@@ -304,6 +307,8 @@ function stopRect()
 
 /*********************** RECTANGLE FUNCTIONS ***********************/
 
+
+
 /*********************** CIRCLE FUNCTIONS **************************/
 let centerX, centerY; 
 function startCircle(circleType)
@@ -362,3 +367,71 @@ function stopCircle()
     canvas.removeEventListener('mouseup', circleUp); 
 }
 /*********************** CIRCLE FUNCTIONS **************************/
+
+
+
+
+/************** LINE FUNCTIONS *************/
+
+function startLine()
+{ 
+    color = erasing ? "#ffffff" : selectedColor; 
+
+    canvas.addEventListener('mousedown', lineDown); 
+    canvas.addEventListener('mousemove', lineMove); 
+    canvas.addEventListener('mouseup', lineUp); 
+}
+
+function lineDown(event)
+{ 
+
+    color = selectedColor; 
+    canvasDimensions = canvas.getBoundingClientRect();  // the window may have moved since last time drawn 
+
+
+    lastX = event.clientX - canvasDimensions.left; 
+    lastY = event.clientY - canvasDimensions.top;  
+    currX = lastX; 
+    currY = lastY; 
+    drawing = true; 
+}
+
+function lineMove(event)
+{ 
+    if(!drawing) return; 
+
+    ctx.beginPath(); 
+    ctx.moveTo(lastX, lastY); 
+    ctx.lineTo(currX, currY); 
+    ctx.strokeStyle = "#ffffff"; 
+    ctx.lineWidth = strokeWidths[selectedStroke] + 2; 
+    ctx.setLineDash([]); 
+    ctx.stroke(); 
+
+    currX = event.clientX - canvasDimensions.left; 
+    currY = event.clientY - canvasDimensions.top; 
+
+    ctx.beginPath(); 
+    ctx.moveTo(lastX, lastY); 
+    ctx.lineTo(currX, currY); 
+    ctx.strokeStyle = color; 
+    ctx.lineWidth = strokeWidths[selectedStroke]; 
+    if(selectedStrokeStyle == "dashed") ctx.setLineDash([5, 5]); 
+    else ctx.setLineDash([]); 
+
+    ctx.stroke(); 
+}
+
+function lineUp(event)
+{ 
+    drawing = false; 
+}
+
+function stopLine()
+{ 
+    canvas.removeEventListener('mousedown', lineDown); 
+    canvas.removeEventListener('mousemove', lineMove); 
+    canvas.removeEventListener('mouseup', lineUp); 
+}
+
+/************** LINE FUNCTIONS *************/
