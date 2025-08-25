@@ -1,0 +1,53 @@
+body, html{ 
+    width: 100%; 
+    height: 100%; 
+    margin: 0px; 
+}
+
+.system1
+{ 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    border: black 5px solid; 
+}
+
+.system1 #toolBar
+{ 
+    height: 7%; 
+    width: 100%; 
+
+    background-color: white;
+    border-bottom: black 5px solid;
+}
+
+.system1 #screen
+{ 
+    height: 93%; 
+    width: 100%; 
+
+    background-image: url('background.png');
+    background-repeat: repeat; 
+    background-size: 0.2%; 
+}
+
+#toolBar #menu-container
+{ 
+    width: 40%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#toolBar #menu-container .toolBarMenuItems
+{ 
+    all: unset; 
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+}
