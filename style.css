@@ -30,7 +30,7 @@ body, html{
     height: 93%; 
     width: 100%; 
 
-    background-image: url('background.png');
+    background-image: url('images/background.png');
     background-repeat: repeat; 
     background-size: 0.2%; 
 }
@@ -50,4 +50,53 @@ body, html{
     font-size: 30px;
     font-family: 'Courier New', Courier, monospace;
     cursor: pointer;
+}
+
+#screen .desktop-icons
+{ 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    gap: 2vw; 
+}
+
+#screen #folder-previews, #screen #document-previews
+{ 
+    display: flex; 
+    flex-direction: column;
+
+    height: 70%; 
+    width: fit-content; 
+}
+
+#screen #folder-previews .folder, #screen #document-previews .document
+{ 
+    all: unset; 
+
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0px; 
+    padding: 0px; 
+    height: 25%; 
+}
+
+.folder .folderIcon, .document .documentIcon
+{ 
+    height: 80%; 
+    width: auto; 
+    cursor: pointer;
+}
+
+.folder .folderLabel, .document .documentLabel
+{ 
+    margin: -10%; 
+    padding: 0px 5%; 
+    height: fit-content; 
+    background-color: white;
+    color: black; 
 }
