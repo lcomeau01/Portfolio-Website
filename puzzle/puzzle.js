@@ -34,7 +34,7 @@ function getRandomPuzzle()
 
 
 const grid = document.getElementById("tiles-container"); 
-const gridDimensions = grid.getBoundingClientRect(); 
+let gridDimensions = grid.getBoundingClientRect(); 
 const tileWidth = document.getElementById("tile-1").offsetWidth; 
 
 grid.addEventListener("click", tileClicked); 
@@ -49,6 +49,8 @@ function tileClicked(event)
 
 function getRowCol(event)
 { 
+    gridDimensions = grid.getBoundingClientRect();  // in case window was moved
+    
     let mouseX = event.clientX - gridDimensions.left; 
     let mouseY =  event.clientY - gridDimensions.top; 
 
