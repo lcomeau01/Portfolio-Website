@@ -5,8 +5,8 @@ export function dragElement(elmnt)
     const header =   document.getElementById(elmnt.id + "-header"); 
 
     header.onmousedown = dragMouseDown; 
-    const viewportWidth = window.innerWidth; 
-    const viewportHeight = window.innerHeight; 
+    const viewportWidth = window.innerWidth * .97; 
+    const viewportHeight = window.innerHeight * .97; 
 
     function dragMouseDown(e) 
     { 
@@ -51,6 +51,8 @@ export function dragElement(elmnt)
         
         elmnt.style.top = newTop + "px"; 
         elmnt.style.left = newLeft + "px"; 
+
+        elmnt.style.zIndex = new Date().getTime; 
     }
 
     function closeDragElement()

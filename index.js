@@ -1,3 +1,5 @@
+const screen = document.getElementById("screen"); 
+
 const folders = document.getElementById("folder-previews"); 
 const folderNames = ["projects", "Contact Me", "About Me", "ScreenShots"]; 
 
@@ -42,3 +44,48 @@ documentNames.forEach((elem) => {
     documents.appendChild(newDocument);   
 
 }); 
+
+
+const menuItems = document.getElementsByClassName("toolBarMenuItems"); 
+const menuContents = {"apple": ["About the Developer...", "Alarm Clock", "Calculator", "Tile Puzzle", "NotePad", "MacPaint 1.0"]}; 
+
+Array.from(menuItems).forEach((elem) => { 
+    elem.addEventListener('mousedown', menuItemClicked); 
+    elem.addEventListener('mouseup', menuItemUnclicked); 
+}); 
+
+const apple = document.getElementById("apple"); 
+const appleX = apple.offsetLeft
+const appleY = apple.offsetTop; 
+const appleMenu = document.createElement("div"); 
+menuContents.apple.forEach((elem, i) => { 
+    let newMenuItem = document.createElement("button"); 
+    newMenuItem.innerText = elem; 
+    newMenuItem.id = "appleMenuItem" + i; 
+    newMenuItem.className = "appleMenuItem"; 
+
+    appleMenu.appendChild(newMenuItem); 
+}); 
+
+appleMenu.id = "appleMenu"; 
+appleMenu.style.top = appleY + 5 + "px"; 
+appleMenu.style.left = appleX - 2+ "px"; 
+appleMenu.style.display = 'none'; 
+screen.appendChild(appleMenu); 
+
+function menuItemClicked(event)
+{ 
+    let item = event.currentTarget; 
+    item.addEventListener('mouseleave', menuItemUnclicked); 
+    item.style.backgroundColor = 'black'; 
+    item.style.color = 'white'; 
+    if(item.id == "apple") appleMenu.style.display = 'flex'; 
+}
+
+function menuItemUnclicked(event)
+{ 
+    let item = event.currentTarget; 
+    item.style.backgroundColor = 'white'; 
+    item.style.color = 'black'; 
+    if(item.id == "apple") appleMenu.style.display = 'none'; 
+}
