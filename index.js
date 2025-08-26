@@ -68,15 +68,18 @@ menuContents.apple.forEach((elem, i) => {
 }); 
 
 appleMenu.id = "appleMenu"; 
-appleMenu.style.top = appleY + 5 + "px"; 
-appleMenu.style.left = appleX - 2+ "px"; 
+appleMenu.style.top = appleY + 4 + "px"; 
+appleMenu.style.left = appleX - 2 + "px"; 
 appleMenu.style.display = 'none'; 
 screen.appendChild(appleMenu); 
 
 function menuItemClicked(event)
 { 
     let item = event.currentTarget; 
-    item.addEventListener('mouseleave', menuItemUnclicked); 
+
+    item.addEventListener('mouseleave', menuOpened); 
+
+
     item.style.backgroundColor = 'black'; 
     item.style.color = 'white'; 
     if(item.id == "apple") appleMenu.style.display = 'flex'; 
@@ -88,4 +91,22 @@ function menuItemUnclicked(event)
     item.style.backgroundColor = 'white'; 
     item.style.color = 'black'; 
     if(item.id == "apple") appleMenu.style.display = 'none'; 
+}
+
+function menuOpened(event)
+{ 
+    let menu = event.currentTarget; 
+    let newMouseLocation = event.relatedTarget; 
+
+    if(newMouseLocation.id == menu.id + "Menu")
+    { 
+       newMouseLocation.addEventListener("mouseover", chooseApp); 
+    }
+    else menuItemUnclicked(event);  
+}
+
+function chooseApp(event)
+{ 
+    let menu = event.currentTarget; 
+    menu.addEventListener("mouseout", () => {menu.style.display = "none"}); 
 }
