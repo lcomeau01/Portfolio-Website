@@ -31,6 +31,7 @@ body, html{
 
 .system1 #screen
 { 
+
     height: 93%; 
     width: 100%; 
 
@@ -108,7 +109,7 @@ body, html{
     color: black; 
 }
 
-#screen #appleMenu
+#screen #appleMenu, #fileMenu, #editMenu
 { 
     position: absolute; 
     display: flex; 
@@ -119,10 +120,9 @@ body, html{
 
     background-color: white;
     border: black 3px solid; 
-    border-top: none;
 }
 
-#screen #appleMenu .appleMenuItem
+#screen .menuItem
 { 
     all: unset; 
 
@@ -137,7 +137,12 @@ body, html{
     cursor: pointer;
 }
 
-#screen #appleMenu .appleMenuItem#appleMenuItem0
+#screen .menuItem:hover
+{
+    background-color: lightgray;
+}
+
+#screen #appleMenu .menuItem#AbouttheDeveloper
 { 
     /* max-width: 100%;  */
     padding-bottom: 5%;

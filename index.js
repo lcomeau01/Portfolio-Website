@@ -1,4 +1,5 @@
 const screen = document.getElementById("screen"); 
+const vw = window.innerWidth / 100;
 
 const folders = document.getElementById("folder-previews"); 
 const folderNames = ["projects", "Contact Me", "About Me", "ScreenShots"]; 
@@ -22,10 +23,10 @@ folderNames.forEach((elem) => {
     folders.appendChild(newFolder); 
 }); 
 
-const documents = document.getElementById("document-previews"); 
-const documentNames = ["Resume", "User Guide"]; 
+const desktopDocuments = document.getElementById("document-previews"); 
+const desktopDocumentNames = ["Resume", "User Guide"]; 
 
-documentNames.forEach((elem) => { 
+desktopDocumentNames.forEach((elem) => { 
     let newDocument = document.createElement("button"); 
     newDocument.id = elem;  
     newDocument.className = "document"; 
@@ -41,72 +42,94 @@ documentNames.forEach((elem) => {
     newDocument.appendChild(newDocumentIcon); 
     newDocument.appendChild(newDocumentLabel); 
 
-    documents.appendChild(newDocument);   
+    desktopDocuments.appendChild(newDocument);   
 
 }); 
 
 
-const menuItems = document.getElementsByClassName("toolBarMenuItems"); 
-const menuContents = {"apple": ["About the Developer...", "Alarm Clock", "Calculator", "Tile Puzzle", "NotePad", "MacPaint 1.0"]}; 
+const toolBarItems = document.querySelectorAll("button.toolBarMenuItems"); 
+console.log(toolBarItems); 
+const menuContents = {"apple": ["About the Developer...", "Alarm Clock", "Calculator", "Tile Puzzle", "NotePad", "MacPaint"], 
+                      "file": ["hi there", "good morning", "sort", "copy", "duplicate"], 
+                      "edit": ["copy", "paste", "cut", "edject", "trim", "L"]
+};
+const menus = {}; 
 
-Array.from(menuItems).forEach((elem) => { 
-    elem.addEventListener('mousedown', menuItemClicked); 
-    elem.addEventListener('mouseup', menuItemUnclicked); 
+toolBarItems.forEach((item) => { 
+    let id = item.id; 
+
+    if (!menus[id]) createMenu(id); 
+
+    item.addEventListener("mousedown", handleMenuPress); 
+    item.addEventListener("mouseleave", handleMenuMove); 
+    item.addEventListener("mouseup", handleMenuUp); 
 }); 
 
-const apple = document.getElementById("apple"); 
-const appleX = apple.offsetLeft
-const appleY = apple.offsetTop; 
-const appleMenu = document.createElement("div"); 
-menuContents.apple.forEach((elem, i) => { 
-    let newMenuItem = document.createElement("button"); 
-    newMenuItem.innerText = elem; 
-    newMenuItem.id = "appleMenuItem" + i; 
-    newMenuItem.className = "appleMenuItem"; 
-
-    appleMenu.appendChild(newMenuItem); 
-}); 
-
-appleMenu.id = "appleMenu"; 
-appleMenu.style.top = appleY + 4 + "px"; 
-appleMenu.style.left = appleX - 2 + "px"; 
-appleMenu.style.display = 'none'; 
-screen.appendChild(appleMenu); 
-
-function menuItemClicked(event)
+function createMenu(itemId)
 { 
-    let item = event.currentTarget; 
+    let item = document.getElementById(itemId); 
 
-    item.addEventListener('mouseleave', menuOpened); 
+    const menu = document.createElement("div"); 
+    menu.id = itemId + "Menu"; 
 
+    menu.style.left = (item.offsetLeft + 3) + "px";
+    menu.style.top = item.offsetTop + item.offsetHeight + "px"; 
+    menu.style.display = "none"; 
 
-    item.style.backgroundColor = 'black'; 
-    item.style.color = 'white'; 
-    if(item.id == "apple") appleMenu.style.display = 'flex'; 
-}
-
-function menuItemUnclicked(event)
-{ 
-    let item = event.currentTarget; 
-    item.style.backgroundColor = 'white'; 
-    item.style.color = 'black'; 
-    if(item.id == "apple") appleMenu.style.display = 'none'; 
-}
-
-function menuOpened(event)
-{ 
-    let menu = event.currentTarget; 
-    let newMouseLocation = event.relatedTarget; 
-
-    if(newMouseLocation.id == menu.id + "Menu")
+    if(menuContents[itemId])
     { 
-       newMouseLocation.addEventListener("mouseover", chooseApp); 
+        menuContents[itemId].forEach((elem) => { 
+            let newMenuItem = document.createElement("button"); 
+            newMenuItem.innerText = elem; 
+            newMenuItem.id = elem.replaceAll(' ', '').replaceAll('.', '');
+            newMenuItem.className = "menuItem"; 
+
+            newMenuItem.addEventListener("mouseup", () => console.log("selected app:", elem)); 
+
+            menu.appendChild(newMenuItem); 
+        }); 
     }
-    else menuItemUnclicked(event);  
+
+    screen.appendChild(menu); 
+    menus[itemId] = menu;
 }
 
-function chooseApp(event)
+function handleMenuPress(event)
 { 
-    let menu = event.currentTarget; 
-    menu.addEventListener("mouseout", () => {menu.style.display = "none"}); 
+    let toolBarItem = event.currentTarget; 
+
+    toolBarItem.style.backgroundColor = "black";
+    toolBarItem.style.color = "white"; 
+
+    let toolBarMenu = document.getElementById(toolBarItem.id + "Menu"); 
+    toolBarMenu.style.display = "flex"; 
+}
+
+function handleMenuUp(event)
+{ 
+    let toolBarItem = event.currentTarget; 
+    hideMenu(toolBarItem);
+}
+
+function handleMenuMove(event)
+{ 
+    console.log(event.currentTarget); 
+    let toolBarItem = event.currentTarget; 
+    let toolBarMenu = document.getElementById(toolBarItem.id + "Menu"); 
+
+    if(!toolBarMenu.contains(event.relatedTarget)) hideMenu(toolBarItem); 
+    else 
+    { 
+        toolBarMenu.addEventListener('mouseleave', () => hideMenu(toolBarItem)); 
+        toolBarMenu.addEventListener('mouseup', () => hideMenu(toolBarItem)); 
+    }
+}
+
+function hideMenu(item)
+{ 
+    item.style.backgroundColor = "white";
+    item.style.color = "black"; 
+
+    let menu = document.getElementById(item.id + "Menu"); 
+    menu.style.display = "none"; 
 }
