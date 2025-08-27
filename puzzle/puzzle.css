@@ -12,7 +12,7 @@ body{
   align-items: center;
 }
 
-.puzzle-widget
+.TilePuzzle-widget
 { 
   width: 50vh; 
   height: 50vh; 
@@ -25,7 +25,7 @@ body{
   border-radius: 10px;
 }
 
-.puzzle-widget .header
+.TilePuzzle-widget .header
 { 
   display: flex; 
   align-items: center;
@@ -39,11 +39,11 @@ body{
   border-bottom: black solid 5px;
 }
 
-.puzzle-widget .header h3{ 
+.TilePuzzle-widget .header h3{ 
     font-size: 3.5vh; 
 }
 
-.puzzle-widget .header #exit-box
+.TilePuzzle-widget .header #exit-box
 { 
     display: flex; 
     justify-content: center;
@@ -59,7 +59,7 @@ body{
 }
 
 
-.puzzle-widget-body
+.TilePuzzle-widget-body
 { 
   width: 100%; 
   height: 90%; 
@@ -85,7 +85,7 @@ body{
   
 }
 
-.puzzle-widget .puzzle-widget-body .puzzle-grid 
+.TilePuzzle-widget .TilePuzzle-widget-body .puzzle-grid 
 { 
     background: white; 
     width: 40vh; 
@@ -97,7 +97,7 @@ body{
     
 }
 
-.puzzle-widget .puzzle-widget-body .puzzle-grid .tile
+.TilePuzzle-widget .TilePuzzle-widget-body .puzzle-grid .tile
 { 
     border: black solid 5px; 
     background-color: white;
@@ -108,7 +108,7 @@ body{
     -webkit-text-stroke: 8px black; */
 }
 
-.puzzle-widget .puzzle-widget-body .puzzle-grid .tile.missing-tile
+.TilePuzzle-widget .TilePuzzle-widget-body .puzzle-grid .tile.missing-tile
 { 
     background-color: white;
     background-image: radial-gradient(black 0.2vh, transparent 0.2vh);

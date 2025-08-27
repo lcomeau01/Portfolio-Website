@@ -2,7 +2,7 @@ import { closeWidget } from "../close.js";
 import { dragElement } from "../drag.js";
 
 
-const puzzle = document.getElementById("puzzle-widget"); 
+const puzzle = document.getElementById("TilePuzzle-widget"); 
 let possibleTileValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 const winCondition = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]; 
 const beep =  new Audio('../beep.mp3');
